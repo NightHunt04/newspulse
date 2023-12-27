@@ -230,7 +230,7 @@ function hover_effect() {
 }
 
 let is_load_more_btn = false
-
+let is_news_fetched = false
 async function fetchApis(latitude, longitude, search = '') {
     let newsApiUrl
     if(search === ''){
@@ -246,6 +246,10 @@ async function fetchApis(latitude, longitude, search = '') {
     try {
       // Fetch News API regardless of geolocation permission
         const newsData = await fetchData(newsApiUrl);
+
+        if(!is_news_fetched)
+            is_news_fetched = true
+
         news_data = newsData.articles
         console.log(news_data)
         set_news_data(newsData.articles)
@@ -406,16 +410,24 @@ t1.to('.blocks .box', {
 }, 'a')
 
 function fetch_thru_source(source) {
-    fetch(source)
+    let newsApiUrl = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${NEWS_API_KEY}`
+
+    fetch(newsApiUrl)
     .then(response => response.json())
     .then(data => {
-        console.log(data.articles)
+        news_data = data.articles
+        index = 0
+        heading.textContent = source
+        set_news_data(news_data)
     })
 }
 
 sources_btn.forEach(btn => {
     btn.addEventListener('click', e => {
         let source = btn.textContent
-        fetch_thru_source(source)
+
+        if(is_news_fetched)
+            fetch_thru_source(source)
     })
 })
+
