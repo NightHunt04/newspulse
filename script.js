@@ -1,7 +1,7 @@
 const NEWS_API_KEY = '0f7e87ab2d6b4a36b5ea1644ba6cc876',
-NEWS_URL_ENDPOINT = `https://newsapi.org/v2/top-headlines?apiKey=${NEWS_API_KEY}&language=en`,
-OPEN_WEATHER_API_KEY = `abaa2cd9cbad066635281a7a8dbe5bfc`
-let CURRENT_WEATHER_URL_ENDPOINT
+OPEN_WEATHER_API_KEY = 'abaa2cd9cbad066635281a7a8dbe5bfc',
+NASA_API_KEY = 'Agg37VgTkuMcPmCXDi1PZ7yR7aDVUOQhRrjmdmld'
+
 
 // DOM
 const content_wrapper = document.querySelector('.banner .right .content-wrapper'),
@@ -280,9 +280,12 @@ logo.addEventListener('click', (e) => {
     input_search.value = ''
 })
 
+// *** Starter of the js code
 function showPosition(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
+
+    // here's where the story begins from 
     fetchApis(latitude, longitude);
 }
 
@@ -304,6 +307,54 @@ function showError(error) {
     }
 }
 
+// checking if the animation has already been played or not by using sessionStorage
+// const has_anim_played = sessionStorage.getItem('anim')
+
+// if(!has_anim_played) {
+//     // gsap loader animation
+
+//     const t1 = gsap.timeline()
+
+//     t1.to('body', {
+//         overflow: 'hidden'
+//     })
+//     t1.from('.layer .letter', {
+//         delay: 1,
+//         stagger: 0.06,
+//         opacity: 0,
+//         y: 83,
+//         duration: 1.2
+//     })
+//     t1.to('.layer .letter', {
+//         delay: 0.6,
+//         opacity: 0,
+//         duration: 0.7,
+//         display: 'none'
+//     })
+//     t1.to('.blocks .box', {
+//         delay: 1,
+//         duration: 1,
+//         // ease: 'power2.inOut',
+//         opacity: 0
+//     }, 'a')
+//     t1.to('.layer', {
+//         display: 'none'
+//     }, 'a')
+//     t1.to('body', {
+//         overflow: 'auto'
+//     }, 'a')
+//     t1.to('.blocks', {
+//         display: 'none'
+//     }, 'a')
+//     t1.to('.blocks .box', {
+//         display: 'none',
+//         onComplete: anim_completed
+//     }, 'a')
+
+//     function anim_completed() {
+//         sessionStorage.setItem('anim', true)
+//     }
+// }
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
 } else {
@@ -371,43 +422,6 @@ cancel_input_category.addEventListener('click', e => {
     cancel_input_category.style.display = 'none'
 })
 
-
-const t1 = gsap.timeline()
-
-t1.to('body', {
-    overflow: 'hidden'
-})
-t1.from('.layer .letter', {
-    delay: 1,
-    stagger: 0.06,
-    opacity: 0,
-    y: 83,
-    duration: 1.2
-})
-t1.to('.layer .letter', {
-    delay: 0.6,
-    opacity: 0,
-    duration: 0.7,
-    display: 'none'
-})
-t1.to('.blocks .box', {
-    delay: 1,
-    duration: 1,
-    // ease: 'power2.inOut',
-    opacity: 0
-}, 'a')
-t1.to('.layer', {
-    display: 'none'
-}, 'a')
-t1.to('body', {
-    overflow: 'auto'
-}, 'a')
-t1.to('.blocks', {
-    display: 'none'
-}, 'a')
-t1.to('.blocks .box', {
-    display: 'none'
-}, 'a')
 
 function fetch_thru_source(source) {
     let newsApiUrl = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${NEWS_API_KEY}`

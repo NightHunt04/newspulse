@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.left-item {
+    padding-top: 15px;
+}
+.left-item .apod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.left-item button:active, .left-item button:focus {
+    background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
+    color: #fff;
+}
+.banner .right .top {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.banner .right .heading {
+    padding-top: 20px;
+    font-size: 75px;
+    color: #232323;
+}
+.banner .right .heading span:not(.date) {
+    font-style: italic;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to right, #FEAC5E, #C779D0, #4BC0C8);
+}
+.banner .right .about-apod {
+    padding: 10px 30px 20px 30px;
+    line-height: 1.9em;
+    max-width: 1500px;
+    letter-spacing: 0.4px;
+    color: #444444;
+}
+.right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.nasa-content h3 {
+    padding: 20px 20px 10px 20px;
+    font-size: 43px;
+    width: 100%;
+}
+.nasa-content h3 .date {
+    font-size: 19px;
+    color: #4b4b4b;
+}
+.nasa-content p {
+    padding: 10px 20px 140px 10px;
+    font-size: 20px;
+    line-height: 1.6em;
+}
+.nasa-content .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    overflow: hidden;
+    gap: 20px;
+    justify-content: center;
+}
+.nasa-content .grid-container .card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 13px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+    background: #f5f5f5;
+}
+.nasa-content .grid-container .card img {
+    border-radius: 11px;
+}
+.nasa-content .grid-container .card .img-content {
+    overflow: hidden;
+}
+.nasa-content .grid-container .card h4 {
+    font-size: 25px;
+    padding: 5px;
+}
+.nasa-content .grid-container .card p {
+    padding: 5px;
+    font-size: 19px;
+    letter-spacing: 0.4px;
+    max-width: 500px;
+}
+.nasa-content .grid-container .card .date {
+    color: #6c6c6c;
+}
+.nasa-content .grid-container .card.large {
+    grid-row: span 2;
+}
+.nasa-content .grid-container .card.short {
+    grid-row: span 1;
+}
