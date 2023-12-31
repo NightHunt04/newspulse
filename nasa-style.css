@@ -17,6 +17,12 @@
     background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
     color: #fff;
 }
+.banner .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .banner .right .apod-context {
     display: none;
 }
@@ -102,7 +108,7 @@
     letter-spacing: 0.4px;
     line-height: 1.66em;
 }
-.nasa-content .load {
+.banner .right .load {
     text-decoration: none;
     background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
     color: #fff;
@@ -113,8 +119,9 @@
     border-radius: 16px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
     margin-bottom: 40px;
+    display: none;
 }
-.nasa-content .load:hover {
+.banner .right .load:hover {
     opacity: 0.8;
 }
 

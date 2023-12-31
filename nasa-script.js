@@ -5,7 +5,8 @@ const nasaContentWrapper = document.querySelector('.nasa-content'),
 randomAPODBtn = document.querySelector('.view-random-aopd'),
 marsPhotosBtn = document.querySelector('.mars-photo'),
 apodBtn = document.querySelector('.apod'),
-apodContextWrapper = document.querySelector('.apod-context')
+apodContextWrapper = document.querySelector('.apod-context'),
+loadRandomAPODBtn = document.querySelector('.load')
 
 const PROMISES = [
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
@@ -45,12 +46,13 @@ Promise.allSettled(PROMISES)
 
 // this function will set the html data after the promise is resolved successfully of APOD
 function setAPOD(data) {
+    loadRandomAPODBtn.style.display = 'none'
+    apodContextWrapper.style.display = 'block'
+
     const date = data.date,
     explanation = data.explanation,
     title = data.title,
     url = data.url
-
-    apodContextWrapper.style.display = 'block'
 
     const h3 = document.createElement('h3')
     const span = document.createElement('span')
@@ -101,10 +103,79 @@ document.querySelectorAll('.left-item button')
         })
     })
 
-let indexRandomAPOD = 0
+let indexRandomAPOD = 0,
+gridContainer
+
+sessionStorage.setItem('isRandomAPODLoaded', false)
+
 function setRandomAPOD(data) {
+    if(!sessionStorage.getItem('isRandomAPODLoaded')) {
+        sessionStorage.setItem('isRandomAPODLoaded', true)
+        gridContainer = document.createElement('div')
+        gridContainer.className = 'grid-container'
+
+        let h3 = document.createElement('h3')
+        h3.textContent = 'Randomly chosen APODs'
+
+        // const aLoadRandomAPOD = document.createElement('a')
+        // aLoadRandomAPOD.className = 'load'
+        // aLoadRandomAPOD.textContent = 'Load more'
+
+        nasaContentWrapper.innerHTML = ''
+        nasaContentWrapper.appendChild(h3)
+        nasaContentWrapper.appendChild(gridContainer)
+        // nasaContentWrapper.appendChild(aLoadRandomAPOD)
+
+        h3 = null
+        apodContextWrapper.style.display = 'none'
+        loadRandomAPODBtn.style.display = 'block'
+    }
     for(let i = 0; i < 15; i++) {
-        console.log(data[i].media_type)
+        if(indexRandomAPOD > 100) {
+            alert('No more random APODs!')
+            return
+        }
+
+        if(data[indexRandomAPOD].media_type !== 'video') {
+            const card = document.createElement('div')
+            card.className = 'card'
+
+            const imgWrapper = document.createElement('div')
+            imgWrapper.className = 'img-wrapper'
+
+            const img = document.createElement('img')
+            img.src = data[indexRandomAPOD].url
+
+            imgWrapper.appendChild(img)
+
+            const imgContent = document.createElement('div')
+            imgContent.className = 'img-content'
+
+            const h4 = document.createElement('h4')
+            h4.textContent = data[indexRandomAPOD].title
+
+            const date = document.createElement('p')
+            date.className = 'date'
+            date.textContent = data[indexRandomAPOD].date
+
+            const desc = document.createElement('p')
+            desc.className = 'desc'
+            desc.textContent = data[indexRandomAPOD].explanation
+
+            imgContent.appendChild(h4)
+            imgContent.appendChild(date)
+            imgContent.appendChild(desc)
+
+            card.appendChild(imgWrapper)
+            card.appendChild(imgContent)
+           
+            gridContainer.appendChild(card)
+        }
+        indexRandomAPOD++
     }
 }
 
+loadRandomAPODBtn.addEventListener('click', e => {
+    const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
+    setRandomAPOD(data)
+})
