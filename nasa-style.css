@@ -17,6 +17,9 @@
     background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
     color: #fff;
 }
+.banner .right .apod-context {
+    display: none;
+}
 .banner .right .top {
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
@@ -44,9 +47,15 @@
     height: 100%;
     object-fit: cover;
 }
+.nasa-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .nasa-content h3 {
     padding: 20px 20px 10px 20px;
-    font-size: 43px;
+    font-size: 73px;
     width: 100%;
 }
 .nasa-content h3 .date {
@@ -59,43 +68,53 @@
     line-height: 1.6em;
 }
 .nasa-content .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 20px;
-    overflow: hidden;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 .nasa-content .grid-container .card {
-    padding: 10px;
-    border: 1px solid #ddd;
-    overflow: hidden;
-    border-radius: 13px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
-    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 30px auto;
+    border-bottom: 1px solid #ddd;
 }
-.nasa-content .grid-container .card img {
-    border-radius: 11px;
+.nasa-content .grid-container .img-wrapper {
+    width: 40%;
+    height: 800px;
 }
-.nasa-content .grid-container .card .img-content {
-    overflow: hidden;
+.nasa-content .grid-container .img-content {
+    width: 60%;
+    padding-left: 20px;
 }
-.nasa-content .grid-container .card h4 {
-    font-size: 25px;
-    padding: 5px;
+.nasa-content .grid-container .img-content h4 {
+    font-size: 38px;
 }
-.nasa-content .grid-container .card p {
-    padding: 5px;
-    font-size: 19px;
+.nasa-content .grid-container .img-content .date {
+    color: #767676;
+    font-size: 17px;
+}
+.nasa-content .grid-container .img-content .desc {
+    max-width: 900px;
     letter-spacing: 0.4px;
-    max-width: 500px;
+    line-height: 1.66em;
 }
-.nasa-content .grid-container .card .date {
-    color: #6c6c6c;
+.nasa-content .load {
+    text-decoration: none;
+    background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
 }
-.nasa-content .grid-container .card.large {
-    grid-row: span 2;
+.nasa-content .load:hover {
+    opacity: 0.8;
 }
-.nasa-content .grid-container .card.short {
-    grid-row: span 1;
-}
+

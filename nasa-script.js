@@ -10,7 +10,7 @@ apodContextWrapper = document.querySelector('.apod-context')
 const PROMISES = [
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
         .then(response => response.json()),
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&count=10`)
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&count=100`)
         .then(response => response.json()),
     fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=${NASA_API_KEY}`) 
         .then(response => response.json())
@@ -89,6 +89,7 @@ document.querySelectorAll('.left-item button')
             else if((butn.className === 'view-random-apod' || butn.className === 'view-random-apod active') && isFetched[1]) {
                 const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
                 console.log('randomApod', data)
+                setRandomAPOD(data)
                 apodBtn.blur()
             }
             else if((butn.className === 'mars-photo' || butn.className === 'mars-photo active') && isFetched[2]) {
@@ -100,7 +101,10 @@ document.querySelectorAll('.left-item button')
         })
     })
 
+let indexRandomAPOD = 0
 function setRandomAPOD(data) {
-    
+    for(let i = 0; i < 15; i++) {
+        console.log(data[i].media_type)
+    }
 }
 
