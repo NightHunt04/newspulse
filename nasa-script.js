@@ -1,4 +1,5 @@
-const NASA_API_KEY = 'ZahrlmtmO6nHKcAsOWgLygV27sZlXDje5BUgBRGP'
+// Below goes your nasa api key
+const NASA_API_KEY = 'NASA API'
 
 // DOM
 const nasaContentWrapper = document.querySelector('.nasa-content'),
