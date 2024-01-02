@@ -1,6 +1,7 @@
-const NEWS_API_KEY = '0f7e87ab2d6b4a36b5ea1644ba6cc876',
-OPEN_WEATHER_API_KEY = 'abaa2cd9cbad066635281a7a8dbe5bfc',
-NASA_API_KEY = 'Agg37VgTkuMcPmCXDi1PZ7yR7aDVUOQhRrjmdmld'
+// Your api keys goes down here
+const NEWS_API_KEY = 'NEWS_API',
+OPEN_WEATHER_API_KEY = 'OPEN_WEATHER_API',
+NASA_API_KEY = 'NASA_API'
 
 
 // DOM
