@@ -92,7 +92,7 @@ document.querySelectorAll('.left-item button')
                 const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
                 console.log('randomApod', data)
                 setRandomAPOD(data)
-                apodBtn.blur()
+                // apodBtn.blur()
             }
             else if((butn.className === 'mars-photo' || butn.className === 'mars-photo active') && isFetched[2]) {
                 const data = JSON.parse(sessionStorage.getItem('marsPhotos'))
@@ -109,9 +109,32 @@ gridContainer
 sessionStorage.setItem('isRandomAPODLoaded', false)
 
 function setRandomAPOD(data) {
-    if(!sessionStorage.getItem('isRandomAPODLoaded')) {
-        sessionStorage.setItem('isRandomAPODLoaded', true)
-        gridContainer = document.createElement('div')
+    // if(sessionStorage.getItem('isRandomAPODLoaded') === false) {
+    //     console.log('am in')
+    //     sessionStorage.setItem('isRandomAPODLoaded', true)
+    //     gridContainer = document.createElement('div')
+    //     gridContainer.className = 'grid-container'
+
+    //     let h3 = document.createElement('h3')
+    //     h3.textContent = 'Randomly chosen APODs'
+
+    //     // const aLoadRandomAPOD = document.createElement('a')
+    //     // aLoadRandomAPOD.className = 'load'
+    //     // aLoadRandomAPOD.textContent = 'Load more'
+
+    //     nasaContentWrapper.innerHTML = ''
+    //     nasaContentWrapper.appendChild(h3)
+    //     nasaContentWrapper.appendChild(gridContainer)
+    //     // nasaContentWrapper.appendChild(aLoadRandomAPOD)
+
+    //     h3 = null
+    //     apodContextWrapper.style.display = 'none'
+    //     loadRandomAPODBtn.style.display = 'block'
+
+    //     // console.log('first time', gridContainer)
+    // }
+
+    gridContainer = document.createElement('div')
         gridContainer.className = 'grid-container'
 
         let h3 = document.createElement('h3')
@@ -128,8 +151,8 @@ function setRandomAPOD(data) {
 
         h3 = null
         apodContextWrapper.style.display = 'none'
-        loadRandomAPODBtn.style.display = 'block'
-    }
+        loadRandomAPODBtn.style.display = 'flex'
+
     for(let i = 0; i < 15; i++) {
         if(indexRandomAPOD > 100) {
             alert('No more random APODs!')
@@ -168,7 +191,6 @@ function setRandomAPOD(data) {
 
             card.appendChild(imgWrapper)
             card.appendChild(imgContent)
-           
             gridContainer.appendChild(card)
         }
         indexRandomAPOD++
@@ -177,5 +199,10 @@ function setRandomAPOD(data) {
 
 loadRandomAPODBtn.addEventListener('click', e => {
     const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
+    console.log('clicked on load more')
     setRandomAPOD(data)
 })
+
+function setNextLoadedRandomAPOD(data) {
+    
+}
