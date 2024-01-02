@@ -1,3 +1,4 @@
+// Below goes your nasa api key
 const NASA_API_KEY = 'NASA API'
 
 // DOM
