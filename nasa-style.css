@@ -127,4 +127,38 @@
 .banner .right .load:hover {
     opacity: 0.8;
 }
-
+.nasa-content .mars-img-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    grid-template-rows: 670px;
+}
+.nasa-content .mars-img-container .img-wrapper {
+    width: 500px;
+    height: 650px;
+}
+.nasa-content .mars-img-container .date {
+    color: #797979;
+    font-size: 16px;
+}
+.banner .right .load-mars {   
+    width: 120px;
+    text-decoration: none;
+    background: linear-gradient(150deg, #3A1C71, #D76D77, #FFAF7B);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    cursor: pointer;
+}
+.banner .right .load-mars:hover {
+    opacity: 0.8;
+}

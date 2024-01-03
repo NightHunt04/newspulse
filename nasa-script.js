@@ -7,7 +7,8 @@ randomAPODBtn = document.querySelector('.view-random-aopd'),
 marsPhotosBtn = document.querySelector('.mars-photo'),
 apodBtn = document.querySelector('.apod'),
 apodContextWrapper = document.querySelector('.apod-context'),
-loadRandomAPODBtn = document.querySelector('.load')
+loadRandomAPODBtn = document.querySelector('.load'),
+loadMarsPhotosBtn = document.querySelector('.load-mars')
 
 const PROMISES = [
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
@@ -160,6 +161,47 @@ loadRandomAPODBtn.addEventListener('click', e => {
     setRandomAPOD(data)
 })
 
+let indexMars = 0
+let newlyMarsLoaded = false
+function setMarsPhotos(data) {
+    if(!newlyMarsLoaded) {
+        newlyMarsLoaded = true
+        nasaContentWrapper.innerHTML = ''
+        apodContextWrapper.style.display = 'none'
+        loadRandomAPODBtn.style.display = 'none'
+        loadMarsPhotosBtn.style.display = 'flex'
+
+        marsContainer = document.createElement('div')
+        marsContainer.className = 'mars-img-container'
+
+        let h3 = document.createElement('h3')
+        h3.textContent = 'Mars Rover Photos'
+
+        nasaContentWrapper.appendChild(h3)
+        nasaContentWrapper.appendChild(marsContainer)
+    }
+    for(let i = 0; i < 10; i++) {
+        const card = document.createElement('div')
+        card.className = 'card'
+
+        const imgWrapper = document.createElement('div')
+        imgWrapper.className = 'img-wrapper'
+        const img = document.createElement('img')
+        img.src = data.photos[indexMars].img_src
+        imgWrapper.appendChild(img)
+
+        const p = document.createElement('p')
+        p.className = 'date'
+        p.textContent = data.photos[indexMars].earth_date
+
+        card.appendChild(imgWrapper)
+        card.appendChild(p)
+
+        marsContainer.appendChild(card)
+        indexMars++
+    }
+}
+
 document.querySelectorAll('.left-item button')
     .forEach(butn => {
         butn.addEventListener('click', e => {
@@ -177,6 +219,7 @@ document.querySelectorAll('.left-item button')
             else if((butn.className === 'mars-photo' || butn.className === 'mars-photo active') && isFetched[2]) {
                 const data = JSON.parse(sessionStorage.getItem('marsPhotos'))
                 console.log('marsPhotots', data.photos)
+                setMarsPhotos(data)
                 apodBtn.blur()
             }
             else alert('Something went wrong while fetching API!')  
