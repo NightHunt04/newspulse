@@ -1,5 +1,5 @@
 // Below goes your nasa api key
-const NASA_API_KEY = 'NASA API'
+const NASA_API_KEY = 'ZahrlmtmO6nHKcAsOWgLygV27sZlXDje5BUgBRGP'
 
 // DOM
 const nasaContentWrapper = document.querySelector('.nasa-content'),
@@ -81,61 +81,16 @@ function setAPOD(data) {
     nasaContentWrapper.appendChild(p)
 }
 
-document.querySelectorAll('.left-item button')
-    .forEach(butn => {
-        butn.addEventListener('click', e => {
-            if((butn.className === 'apod' || butn.className === 'apod active') && isFetched[0]) {
-                const data = JSON.parse(sessionStorage.getItem('APOD'))
-                setAPOD(data)
-                console.log('apod', data)
-            }
-            else if((butn.className === 'view-random-apod' || butn.className === 'view-random-apod active') && isFetched[1]) {
-                const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
-                console.log('randomApod', data)
-                setRandomAPOD(data)
-                // apodBtn.blur()
-            }
-            else if((butn.className === 'mars-photo' || butn.className === 'mars-photo active') && isFetched[2]) {
-                const data = JSON.parse(sessionStorage.getItem('marsPhotos'))
-                console.log('marsPhotots', data.photos)
-                apodBtn.blur()
-            }
-            else alert('Something went wrong while fetching API!')  
-        })
-    })
-
 let indexRandomAPOD = 0,
 gridContainer
 
 sessionStorage.setItem('isRandomAPODLoaded', false)
-
+let newlyLoaded = false
 function setRandomAPOD(data) {
-    // if(sessionStorage.getItem('isRandomAPODLoaded') === false) {
-    //     console.log('am in')
-    //     sessionStorage.setItem('isRandomAPODLoaded', true)
-    //     gridContainer = document.createElement('div')
-    //     gridContainer.className = 'grid-container'
+    if(!newlyLoaded) {
+        newlyLoaded = true
 
-    //     let h3 = document.createElement('h3')
-    //     h3.textContent = 'Randomly chosen APODs'
-
-    //     // const aLoadRandomAPOD = document.createElement('a')
-    //     // aLoadRandomAPOD.className = 'load'
-    //     // aLoadRandomAPOD.textContent = 'Load more'
-
-    //     nasaContentWrapper.innerHTML = ''
-    //     nasaContentWrapper.appendChild(h3)
-    //     nasaContentWrapper.appendChild(gridContainer)
-    //     // nasaContentWrapper.appendChild(aLoadRandomAPOD)
-
-    //     h3 = null
-    //     apodContextWrapper.style.display = 'none'
-    //     loadRandomAPODBtn.style.display = 'block'
-
-    //     // console.log('first time', gridContainer)
-    // }
-
-    gridContainer = document.createElement('div')
+        gridContainer = document.createElement('div')
         gridContainer.className = 'grid-container'
 
         let h3 = document.createElement('h3')
@@ -153,6 +108,7 @@ function setRandomAPOD(data) {
         h3 = null
         apodContextWrapper.style.display = 'none'
         loadRandomAPODBtn.style.display = 'flex'
+    }
 
     for(let i = 0; i < 15; i++) {
         if(indexRandomAPOD > 100) {
@@ -204,6 +160,25 @@ loadRandomAPODBtn.addEventListener('click', e => {
     setRandomAPOD(data)
 })
 
-function setNextLoadedRandomAPOD(data) {
-    
-}
+document.querySelectorAll('.left-item button')
+    .forEach(butn => {
+        butn.addEventListener('click', e => {
+            if((butn.className === 'apod' || butn.className === 'apod active') && isFetched[0]) {
+                const data = JSON.parse(sessionStorage.getItem('APOD'))
+                setAPOD(data)
+                console.log('apod', data)
+            }
+            else if((butn.className === 'view-random-apod' || butn.className === 'view-random-apod active') && isFetched[1]) {
+                const data = JSON.parse(sessionStorage.getItem('randomAPOD'))
+                console.log('randomApod', data)
+                setRandomAPOD(data)
+                apodBtn.blur()
+            }
+            else if((butn.className === 'mars-photo' || butn.className === 'mars-photo active') && isFetched[2]) {
+                const data = JSON.parse(sessionStorage.getItem('marsPhotos'))
+                console.log('marsPhotots', data.photos)
+                apodBtn.blur()
+            }
+            else alert('Something went wrong while fetching API!')  
+        })
+    })
